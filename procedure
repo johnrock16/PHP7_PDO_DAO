@@ -1,0 +1,13 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_pessoa_insert`(
+pNome varchar(255),
+pIdade varchar(255),
+pCpf varchar(255)
+
+)
+BEGIN
+
+	INSERT INTO tb_pessoa(TB_PESSOA_NOME, TB_PESSOA_IDADE, TB_PESSOA_CPF) VALUES(pNome,pIdade, pCpf);
+    
+    SELECT * FROM tb_pessoa WHERE TB_PESSOA_ID = LAST_INSERT_ID();
+
+END

@@ -48,14 +48,7 @@
 
             if(count($results)>0){
 
-                $row= $results[0];
-
-                $this->setPessoaId($row['TB_PESSOA_ID']);
-                $this->setPessoaNome($row['TB_PESSOA_NOME']);
-                $this->setPessoaIdade($row['TB_PESSOA_IDADE']);
-                $this->setPessoaCpf($row['TB_PESSOA_CPF']);
-                //para data $this->setDataCadastro(new DateTime($row['data cadastro']));
-
+                $this->setData($results[0]);
             }
         }
 
@@ -87,17 +80,46 @@
 
             if(count($results)>0){
 
-                $row= $results[0];
-
-                $this->setPessoaId($row['TB_PESSOA_ID']);
-                $this->setPessoaNome($row['TB_PESSOA_NOME']);
-                $this->setPessoaIdade($row['TB_PESSOA_IDADE']);
-                $this->setPessoaCpf($row['TB_PESSOA_CPF']);
-                //para data $this->setDataCadastro(new DateTime($row['data cadastro']));
-
+                $this->setData($results[0]);
+               
             }else{
                 throw new Exception("Nome e/ou senha invalidos");
             }
+
+        }
+
+        public function setData($data){
+
+            $this->setPessoaId($data['TB_PESSOA_ID']);
+            $this->setPessoaNome($data['TB_PESSOA_NOME']);
+            $this->setPessoaIdade($data['TB_PESSOA_IDADE']);
+            $this->setPessoaCpf($data['TB_PESSOA_CPF']);
+             //para data $this->setDataCadastro(new DateTime($row['data cadastro']));
+
+
+        }
+
+        public function insert(){
+
+            $sql = new Sql();
+
+            $results = $sql->select("CALL sp_pessoa_insert(:NOME, :IDADE, :CPF)", array(
+                ':NOME'=>$this->getPessoaNome(),
+                ':IDADE'=>$this->getPessoaIdade(),
+                ':CPF'=>$this->getPessoaCpf()
+            ));
+
+            if(count($results)>0){
+                $this->setData($results[0]);
+            }
+
+        }
+
+        public function __construct($nome="", $idade="", $cpf=""){
+            
+            $this->setPessoaNome($nome);
+            $this->setPessoaIdade($idade);
+            $this->setPessoaCpf($cpf);
 
         }
 
