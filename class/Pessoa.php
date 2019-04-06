@@ -59,6 +59,48 @@
             }
         }
 
+        public static function getList(){
+
+            $sql= new Sql();
+
+            return $sql->select("SELECT * FROM tb_pessoa ORDER BY TB_PESSOA_NOME;");
+
+        }
+
+        public static function search($nome){
+            $sql = new Sql();
+
+            return $sql->select("SELECT * FROM tb_pessoa WHERE TB_PESSOA_NOME like :SEARCH ORDER BY TB_PESSOA_NOME;",array(
+                ":SEARCH"=>"%".$nome."%"
+            ));
+
+        }
+
+        public function login($nome,$cpf){
+
+            $sql= new Sql();
+
+            $results=$sql->select("SELECT * FROM tb_pessoa WHERE TB_PESSOA_NOME = :NOME AND TB_PESSOA_CPF = :CPF", array(
+                ":NOME"=>$nome,
+                ":CPF"=>$cpf
+            ));
+
+            if(count($results)>0){
+
+                $row= $results[0];
+
+                $this->setPessoaId($row['TB_PESSOA_ID']);
+                $this->setPessoaNome($row['TB_PESSOA_NOME']);
+                $this->setPessoaIdade($row['TB_PESSOA_IDADE']);
+                $this->setPessoaCpf($row['TB_PESSOA_CPF']);
+                //para data $this->setDataCadastro(new DateTime($row['data cadastro']));
+
+            }else{
+                throw new Exception("Nome e/ou senha invalidos");
+            }
+
+        }
+
         public function __toString(){
 
             return json_encode(array(
