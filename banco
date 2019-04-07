@@ -1,0 +1,10 @@
+create database bd_PHP_PDO;
+
+use bd_PHP_PDO;
+
+create table tb_pessoa(
+TB_PESSOA_ID int primary key auto_increment NOT NULL,
+TB_PESSOA_NOME varchar(255) NOT NULL,
+TB_PESSOA_IDADE varchar(255) NOT NULL,
+TB_PESSOA_CPF varchar(255) NOT NULL
+);
