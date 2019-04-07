@@ -34,9 +34,15 @@
     //echo $aluno;
 
     //alterando
+    //$pessoa= new Pessoa();
+    //$pessoa->loadById(2);
+    //$pessoa->update("elmo", "28", "987.654.123-23");
+    //echo $pessoa;
+
+    //excluindo
     $pessoa= new Pessoa();
-    $pessoa->loadById(2);
-    $pessoa->update("elmo", "28", "987.654.123-23");
+    $pessoa->loadById(6);
+    $pessoa->delete();
     echo $pessoa;
 
 

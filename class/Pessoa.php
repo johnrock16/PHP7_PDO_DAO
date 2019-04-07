@@ -133,6 +133,21 @@
 
         }
 
+        public function delete(){
+
+            $sql = new Sql();
+
+            $sql->query("DELETE FROM tb_pessoa WHERE TB_PESSOA_ID=:ID ", array(
+                ":ID"=>$this->getPessoaId()
+            ));
+
+            $this->setPessoaId(0);
+            $this->setPessoaNome("");
+            $this->setPessoaIdade("");
+            $this->setPessoaCpf("");
+
+        }
+
         public function __construct($nome="", $idade="", $cpf=""){
             
             $this->setPessoaNome($nome);
