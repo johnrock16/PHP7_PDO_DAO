@@ -115,6 +115,24 @@
 
         }
 
+        public function update($nome, $idade, $cpf){
+
+            $this->setPessoaNome($nome);
+            $this->setPessoaIdade($idade);
+            $this->setPessoaCpf($cpf);
+
+            $sql= new Sql();
+
+            $sql->query("UPDATE tb_pessoa SET TB_PESSOA_NOME = :NOME, TB_PESSOA_IDADE = :IDADE, TB_PESSOA_CPF=:CPF WHERE TB_PESSOA_ID = :ID ", array(
+                ":NOME"=>$this->getPessoaNome(),
+                ":IDADE"=>$this->getPessoaIdade(),
+                ":CPF"=>$this->getPessoaCpf(),
+                ":ID"=>$this->getPessoaId()
+            ));
+
+
+        }
+
         public function __construct($nome="", $idade="", $cpf=""){
             
             $this->setPessoaNome($nome);

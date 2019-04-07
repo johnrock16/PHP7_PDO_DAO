@@ -29,8 +29,15 @@
     //echo $aluno;
 
     //cadastrando com o construtor
-    $aluno = new Pessoa("Gasivaldo","18","123.654.789-42");
-    $aluno->insert();
-    echo $aluno;
+    //$aluno = new Pessoa("Gasivaldo","18","123.654.789-42");
+    //$aluno->insert();
+    //echo $aluno;
+
+    //alterando
+    $pessoa= new Pessoa();
+    $pessoa->loadById(2);
+    $pessoa->update("elmo", "28", "987.654.123-23");
+    echo $pessoa;
+
 
 ?>
